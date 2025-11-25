@@ -375,6 +375,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
+            margin-bottom: 20px;
         }
         
         .payment-option {
@@ -413,6 +414,10 @@
         .payment-option p {
             font-size: 0.85rem;
             color: var(--text-light);
+        }
+        
+        .payment-option input[type="radio"] {
+            display: none;
         }
         
         /* Order Summary */
@@ -518,23 +523,6 @@
             font-style: italic;
         }
         
-        .qr-code {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .qr-code img {
-            max-width: 200px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        
-        .qr-code p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 10px;
-        }
-        
         /* Buttons */
         .btn {
             display: inline-block;
@@ -597,6 +585,27 @@
         .btn-whatsapp:hover { 
             background-color: #128C7E;
             border-color: #128C7E;
+        }
+        
+        .submit-btn {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            border: 1px solid var(--primary-black);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--smooth-transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .submit-btn:hover { 
+            background: var(--accent-red);
+            border-color: var(--accent-red);
         }
         
         /* Success Message */
@@ -823,145 +832,147 @@
                 
                 <div class="checkout-form">
                     <div class="form-column">
-                        <h3>Billing Information</h3>
-                        
                         <div class="success-message" id="successMessage">
                             <i class="fas fa-check-circle"></i> Thank you for your purchase! Our team will contact you shortly to confirm your order and payment details.
                         </div>
                         
-                        <form id="checkoutForm" action="https://formsubmit.co/ddbusiness.co@outlook.com" method="POST" novalidate>
-                            <!-- FormSubmit.co Configuration -->
+                        <form id="ddForm" action="https://formsubmit.co/ddbusiness.co@outlook.com" method="POST">
+                            <!-- Prevent spam bot -->
                             <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_subject" value="New Purchase from DD Network Ent.">
                             <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_subject" value="New Purchase from DD Network Ent.">
                             <input type="hidden" name="_next" value="https://www.ddnetwork.uk">
                             <input type="hidden" id="selectedPlan" name="plan" value="Starter Plan">
                             <input type="hidden" id="selectedBilling" name="billing" value="Yearly">
                             <input type="hidden" id="selectedPrice" name="price" value="RM599">
                             <input type="hidden" id="depositAmount" name="deposit" value="RM299.50">
-                            <input type="hidden" id="selectedPaymentMethod" name="paymentMethod" value="">
-                            
+
+                            <h3>Billing Information</h3>
+
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="firstName">First Name <span class="required">*</span></label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                                    <label>First Name *</label>
+                                    <input type="text" name="first_name" class="form-control" required>
                                     <div class="form-error">Please enter your first name</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastName">Last Name <span class="required">*</span></label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                                    <label>Last Name *</label>
+                                    <input type="text" name="last_name" class="form-control" required>
                                     <div class="form-error">Please enter your last name</div>
                                 </div>
                             </div>
-                            
+
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" name="email" class="form-control" required>
+                                <div class="form-error">Please enter a valid email address</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="text" name="phone" class="form-control" placeholder="+60 12-345 6789" required>
+                                <div class="form-error">Please enter your phone number</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" name="company" class="form-control" placeholder="Your company or brand name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Billing Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="Street address">
+                            </div>
+
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="email">Email Address <span class="required">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
-                                    <div class="form-error">Please enter a valid email address</div>
+                                    <label>City</label>
+                                    <input type="text" name="city" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone Number <span class="required">*</span></label>
-                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+60 12-345 6789" required>
-                                    <div class="form-error">Please enter your phone number</div>
+                                    <label>Postcode</label>
+                                    <input type="text" name="postcode" class="form-control">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                <label for="company">Company Name</label>
-                                <input type="text" id="company" name="company" class="form-control" placeholder="Your company or brand name">
+                                <label>Project Details</label>
+                                <textarea name="project_details" class="form-control" rows="4" placeholder="Describe your project requirements..."></textarea>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="address">Billing Address</label>
-                                <input type="text" id="address" name="address" class="form-control" placeholder="Street address">
+
+                            <h3>Payment Method</h3>
+
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="Bank Transfer" required>
+                                    <i class="fas fa-university"></i>
+                                    <h4>Bank Transfer</h4>
+                                    <p>Via WhatsApp only</p>
+                                </label>
+
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="WhatsApp QR">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <h4>WhatsApp QR</h4>
+                                    <p>Scan QR via WhatsApp</p>
+                                </label>
+
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="Touch 'n Go">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <h4>Touch 'n Go</h4>
+                                    <p>Direct on website</p>
+                                </label>
                             </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input type="text" id="city" name="city" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="postcode">Postcode</label>
-                                    <input type="text" id="postcode" name="postcode" class="form-control">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="projectDetails">Project Details</label>
-                                <textarea id="projectDetails" name="projectDetails" class="form-control" rows="4" placeholder="Describe your project requirements..."></textarea>
-                            </div>
-                            
-                            <div class="payment-methods">
-                                <h3>Payment Method</h3>
-                                <div class="payment-options">
-                                    <div class="payment-option" data-method="bank-transfer">
-                                        <i class="fas fa-university"></i>
-                                        <h4>Bank Transfer</h4>
-                                        <p>Via WhatsApp only</p>
-                                    </div>
-                                    <div class="payment-option" data-method="whatsapp-qr">
-                                        <i class="fab fa-whatsapp"></i>
-                                        <h4>WhatsApp QR</h4>
-                                        <p>Scan QR via WhatsApp</p>
-                                    </div>
-                                    <div class="payment-option" data-method="tng">
-                                        <i class="fas fa-mobile-alt"></i>
-                                        <h4>Touch 'n Go</h4>
-                                        <p>Direct on website</p>
-                                    </div>
-                                </div>
+
+                            <div class="payment-details" id="bank-transfer-details">
+                                <h4>Bank Transfer via WhatsApp</h4>
+                                <p>Bank transfer payments can only be processed through WhatsApp. Please contact us to get the bank details and complete your payment.</p>
                                 
-                                <div class="payment-details" id="bank-transfer-details">
-                                    <h4>Bank Transfer via WhatsApp</h4>
-                                    <p>Bank transfer payments can only be processed through WhatsApp. Please contact us to get the bank details and complete your payment.</p>
-                                    
-                                    <div class="whatsapp-payment">
-                                        <h5>Make Payment via WhatsApp</h5>
-                                        <p>Contact us on WhatsApp to get our bank details and complete your payment:</p>
-                                        <div class="whatsapp-number">+60122600969</div>
-                                        <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
-                                            <i class="fab fa-whatsapp"></i> Contact on WhatsApp
-                                        </a>
-                                        <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="payment-details" id="whatsapp-qr-details">
-                                    <h4>WhatsApp QR Payment</h4>
-                                    <p>QR code payments can only be processed through WhatsApp. Please contact us to get the QR code and complete your payment.</p>
-                                    
-                                    <div class="whatsapp-payment">
-                                        <h5>Make Payment via WhatsApp</h5>
-                                        <p>Contact us on WhatsApp to get our payment QR code and complete your payment:</p>
-                                        <div class="whatsapp-number">+60122600969</div>
-                                        <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
-                                            <i class="fab fa-whatsapp"></i> Contact on WhatsApp
-                                        </a>
-                                        <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="payment-details" id="tng-details">
-                                    <h4>Touch 'n Go Payment</h4>
-                                    <p>Click the button below to pay directly with Touch 'n Go eWallet:</p>
-                                    <a href="https://payment.tngdigital.com.my/sc/bDLob7YcpG" target="_blank" class="btn btn-tng">
-                                        Pay with Touch 'n Go
+                                <div class="whatsapp-payment">
+                                    <h5>Make Payment via WhatsApp</h5>
+                                    <p>Contact us on WhatsApp to get our bank details and complete your payment:</p>
+                                    <div class="whatsapp-number">+60122600969</div>
+                                    <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
+                                        <i class="fab fa-whatsapp"></i> Contact on WhatsApp
                                     </a>
-                                    <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
-                                        After making the payment, please return to this page and submit the form so our team can verify your payment.
-                                    </p>
+                                    <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <div class="payment-details" id="whatsapp-qr-details">
+                                <h4>WhatsApp QR Payment</h4>
+                                <p>QR code payments can only be processed through WhatsApp. Please contact us to get the QR code and complete your payment.</p>
+                                
+                                <div class="whatsapp-payment">
+                                    <h5>Make Payment via WhatsApp</h5>
+                                    <p>Contact us on WhatsApp to get our payment QR code and complete your payment:</p>
+                                    <div class="whatsapp-number">+60122600969</div>
+                                    <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
+                                        <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+                                    </a>
+                                    <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-details" id="tng-details">
+                                <h4>Touch 'n Go Payment</h4>
+                                <p>Click the button below to pay directly with Touch 'n Go eWallet:</p>
+                                <a href="https://payment.tngdigital.com.my/sc/bDLob7YcpG" target="_blank" class="btn btn-tng">
+                                    Pay with Touch 'n Go
+                                </a>
+                                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-light);">
+                                    After making the payment, please return to this page and submit the form so our team can verify your payment.
+                                </p>
+                            </div>
+
+                            <button type="submit" class="submit-btn" id="submitBtn">
                                 <span id="submitText">Complete Purchase</span>
                                 <div class="loading" id="loading"></div>
                             </button>
-                            
-                            <a href="https://www.ddnetwork.uk" class="btn btn-secondary">Return to Homepage</a>
                         </form>
+                        
+                        <a href="https://www.ddnetwork.uk" class="btn btn-secondary">Return to Homepage</a>
                     </div>
                     
                     <div class="form-column">
@@ -1148,7 +1159,6 @@
         const selectedBillingInput = document.getElementById('selectedBilling');
         const selectedPriceInput = document.getElementById('selectedPrice');
         const depositAmountInput = document.getElementById('depositAmount');
-        const selectedPaymentMethodInput = document.getElementById('selectedPaymentMethod');
         const summaryPlan = document.getElementById('summaryPlan');
         const summaryBilling = document.getElementById('summaryBilling');
         const summarySubtotal = document.getElementById('summarySubtotal');
@@ -1164,7 +1174,6 @@
         // Current state
         let currentPlan = 'starter';
         let currentBilling = 'yearly';
-        let selectedPaymentMethod = '';
         
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -1209,14 +1218,13 @@
                 this.classList.add('selected');
                 
                 // Get the selected payment method
-                selectedPaymentMethod = this.getAttribute('data-method');
-                selectedPaymentMethodInput.value = selectedPaymentMethod;
+                const selectedPaymentMethod = this.querySelector('input').value;
                 
                 // Hide all payment details
                 paymentDetails.forEach(detail => detail.classList.remove('active'));
                 
                 // Show the selected payment details
-                const selectedDetail = document.getElementById(`${selectedPaymentMethod}-details`);
+                const selectedDetail = document.getElementById(`${selectedPaymentMethod.toLowerCase().replace(' ', '-')}-details`);
                 if (selectedDetail) {
                     selectedDetail.classList.add('active');
                 }
@@ -1283,11 +1291,12 @@
         }
         
         // Form validation
-        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+        document.getElementById('ddForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Check if payment method is selected
-            if (!selectedPaymentMethod) {
+            const paymentMethodSelected = document.querySelector('input[name="payment_method"]:checked');
+            if (!paymentMethodSelected) {
                 alert('Please select a payment method');
                 return;
             }
@@ -1299,10 +1308,10 @@
             
             // Validate form
             let isValid = true;
-            const requiredFields = ['firstName', 'lastName', 'email', 'phone'];
+            const requiredFields = ['first_name', 'last_name', 'email', 'phone'];
             
-            requiredFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
+            requiredFields.forEach(fieldName => {
+                const field = document.querySelector(`input[name="${fieldName}"]`);
                 if (!field.value.trim()) {
                     field.closest('.form-group').classList.add('error');
                     isValid = false;
@@ -1310,7 +1319,7 @@
             });
             
             // Validate email format
-            const emailField = document.getElementById('email');
+            const emailField = document.querySelector('input[name="email"]');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (emailField.value && !emailRegex.test(emailField.value)) {
                 emailField.closest('.form-group').classList.add('error');
