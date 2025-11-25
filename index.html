@@ -485,24 +485,37 @@
             margin-bottom: 15px;
         }
         
-        .bank-details {
+        .whatsapp-payment {
             background-color: var(--primary-white);
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
-        .bank-details p {
-            margin-bottom: 8px;
+        .whatsapp-payment h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-black);
+        }
+        
+        .whatsapp-payment p {
+            margin-bottom: 15px;
             color: var(--text-dark);
         }
         
-        .bank-details p:last-child {
-            margin-bottom: 0;
+        .whatsapp-payment .whatsapp-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 15px;
         }
         
-        .bank-details strong {
-            color: var(--primary-black);
+        .whatsapp-payment .whatsapp-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
         }
         
         .qr-code {
@@ -572,6 +585,18 @@
         .btn-tng:hover { 
             background-color: #0089c0;
             border-color: #0089c0;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: var(--primary-white);
+            border: 1px solid #25D366;
+            margin-top: 15px;
+        }
+        
+        .btn-whatsapp:hover { 
+            background-color: #128C7E;
+            border-color: #128C7E;
         }
         
         /* Success Message */
@@ -653,6 +678,22 @@
         
         .footer-links a:hover { 
             color: var(--accent-red); 
+        }
+        
+        .footer-contact {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .footer-contact a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s var(--smooth-transition);
+        }
+        
+        .footer-contact a:hover {
+            color: var(--accent-red);
         }
         
         .copyright {
@@ -858,7 +899,7 @@
                                     <div class="payment-option" data-method="bank-transfer">
                                         <i class="fas fa-university"></i>
                                         <h4>Bank Transfer</h4>
-                                        <p>Direct bank transfer</p>
+                                        <p>Via WhatsApp only</p>
                                     </div>
                                     <div class="payment-option" data-method="whatsapp-qr">
                                         <i class="fab fa-whatsapp"></i>
@@ -868,35 +909,43 @@
                                     <div class="payment-option" data-method="tng">
                                         <i class="fas fa-mobile-alt"></i>
                                         <h4>Touch 'n Go</h4>
-                                        <p>Pay with TNG eWallet</p>
+                                        <p>Direct on website</p>
                                     </div>
                                 </div>
                                 
                                 <div class="payment-details" id="bank-transfer-details">
-                                    <h4>Bank Transfer Details</h4>
-                                    <p>Please transfer the payment to the following bank account:</p>
-                                    <div class="bank-details">
-                                        <p><strong>Bank:</strong> Maybank</p>
-                                        <p><strong>Account Name:</strong> DD Network Enterprise</p>
-                                        <p><strong>Account Number:</strong> 123456789012</p>
-                                        <p><strong>Reference:</strong> [Your Name] - [Plan Name]</p>
+                                    <h4>Bank Transfer via WhatsApp</h4>
+                                    <p>Bank transfer payments can only be processed through WhatsApp. Please contact us to get the bank details and complete your payment.</p>
+                                    
+                                    <div class="whatsapp-payment">
+                                        <h5>Make Payment via WhatsApp</h5>
+                                        <p>Contact us on WhatsApp to get our bank details and complete your payment:</p>
+                                        <div class="whatsapp-number">+60122600969</div>
+                                        <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
+                                            <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+                                        </a>
+                                        <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
                                     </div>
-                                    <p>After making the payment, please submit the form and our team will verify your payment.</p>
                                 </div>
                                 
                                 <div class="payment-details" id="whatsapp-qr-details">
                                     <h4>WhatsApp QR Payment</h4>
-                                    <p>Scan the QR code below using WhatsApp to make your payment:</p>
-                                    <div class="qr-code">
-                                        <img src="https://via.placeholder.com/200x200?text=WhatsApp+QR+Code" alt="WhatsApp QR Code">
-                                        <p>Scan this QR code with WhatsApp</p>
+                                    <p>QR code payments can only be processed through WhatsApp. Please contact us to get the QR code and complete your payment.</p>
+                                    
+                                    <div class="whatsapp-payment">
+                                        <h5>Make Payment via WhatsApp</h5>
+                                        <p>Contact us on WhatsApp to get our payment QR code and complete your payment:</p>
+                                        <div class="whatsapp-number">+60122600969</div>
+                                        <a href="https://wa.me/60122600969" target="_blank" class="btn btn-whatsapp">
+                                            <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+                                        </a>
+                                        <p class="whatsapp-note">Please mention your name and selected plan when contacting us</p>
                                     </div>
-                                    <p>After making the payment, please submit the form and our team will verify your payment.</p>
                                 </div>
                                 
                                 <div class="payment-details" id="tng-details">
                                     <h4>Touch 'n Go Payment</h4>
-                                    <p>Click the button below to pay with Touch 'n Go eWallet:</p>
+                                    <p>Click the button below to pay directly with Touch 'n Go eWallet:</p>
                                     <a href="https://payment.tngdigital.com.my/sc/bDLob7YcpG" target="_blank" class="btn btn-tng">
                                         Pay with Touch 'n Go
                                     </a>
@@ -977,6 +1026,9 @@
                 <a href="https://www.ddnetwork.uk#about">About</a>
                 <a href="https://www.ddnetwork.uk#plans">Plans</a>
                 <a href="https://www.ddnetwork.uk#contact">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:works@ddnetwork.uk">works@ddnetwork.uk</a>
             </div>
             <div class="copyright">
                 &copy; 2025 DD Network Ent. All Rights Reserved. Founded and led by Danial Danish.
